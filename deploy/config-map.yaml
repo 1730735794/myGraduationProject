@@ -157,3 +157,7 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+
+      - job_name: 'linux-node-cluster'
+        static_configs:
+        - targets: ['124.221.127.211:9100']
