@@ -45,6 +45,3 @@ spec:
   type: NodePort
   selector:
     app: node-exporter
-
-
-    prometheus : linux / http:/metrics
