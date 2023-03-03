@@ -1,4 +1,4 @@
-#prometheus + grafana
+# prometheus + grafana
 1. create namespace `ns-monitor`
 2. clusterRole.yaml
 3. node-exporter.yaml
