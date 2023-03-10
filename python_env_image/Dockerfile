@@ -2,9 +2,6 @@ FROM ubuntu
 MAINTAINER python
 LABEL app.maintainer=lqy
 LABEL app.version="1.0" description="python env"
-COPY ./Python-2.7.16.tgz /var/python2/Python-2.7.16.tgz
-COPY ./time_series_detector/ /var/test/time_series_detector/
-COPY ./test.py /var/test/test.py
 RUN apt-get update\
 && apt-get install -y build-essential python2.7 curl \
 && ln -s /usr/bin/python2.7 /usr/bin/python \

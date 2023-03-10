@@ -4,11 +4,11 @@
 | 目录 | 功能 |
 | --- | --- |
 |/deploy/ | prometheus + grafana环境 | 
-|/time_series_detector/ | metrics算法目录 |
 |/prophet/ | prophet算法目录 |
 |/python_env_image/ | python环境镜像文件 |
 |/metrics_image/ | metrics_image环境镜像文件 |
-|test.py | metrics算法测试文件 |
+|/metrics_image/time_series_detector/ | metrics算法目录 |
+|/metrics_image/test.py | metrics算法测试文件 |
 
 ## 关于prometheus环境
     请查看/deploy/,并按照readme中顺序执行yaml文件

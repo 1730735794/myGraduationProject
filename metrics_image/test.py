@@ -4,8 +4,10 @@ import json
 import requests
 import csv
 import time
+import sys
+import getopt
 PROMETHEUS = 'http://124.221.127.211:30000/'
-
+interval = 1
 
 def get_prometheus_data(expr):
     url = PROMETHEUS + '/api/v1/query?query=' + expr
@@ -15,8 +17,27 @@ def get_prometheus_data(expr):
         print(e)
         return {}
 
+def get_interval(argv):
+    try:
+        opts, args = getopt.getopt(argv,"hi:")
+    except getopt.GetoptError:
+        print 'test.py -i <detect interval>'
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print 'test.py -i <detect interval>'
+            sys.exit()
+        elif opt in ("-i"):
+            try:
+                global interval
+                interval = int(arg)
+            except: 
+                print("please input a integer interval!" + arg + " is invalid!")
+                exit(1)
 
 if __name__ == '__main__':
+    get_interval(sys.argv[1:])
+    print(interval)
     while True:
         # 360 data of the same time a week ago
         results = get_prometheus_data("((1-node_memory_MemFree_bytes/node_memory_MemTotal_bytes)*100)[6m1s:1s] offset 6d23h47m")
@@ -36,7 +57,7 @@ if __name__ == '__main__':
         data['dataB'] = dataB
         data['dataC'] = dataC
         print(detect_obj.value_predict(data))
-        time.sleep(1)
+        time.sleep(interval)
         
 # ALERT_URL = "http://alert-catcher.hf.free4inno.com/alerts"
 
