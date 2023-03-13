@@ -54,11 +54,11 @@ def get_interval(argv):
     try:
         opts, args = getopt.getopt(argv,"hi:")
     except getopt.GetoptError:
-        print 'test.py -i <detect interval>'
+        print ('test.py -i <detect interval>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print 'test.py -i <detect interval>'
+            print ('test.py -i <detect interval>')
             sys.exit()
         elif opt in ("-i"):
             try:

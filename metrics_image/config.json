@@ -1,0 +1,5 @@
+{
+    "prometheus": "http://124.221.127.211:30000",
+    "alertmanager": "http://alert-catcher.hf.free4inno.com/alerts",
+    "min": 1
+}
