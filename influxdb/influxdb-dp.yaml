@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb-dp
+  namespace: influxdb
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - name: influxdb
+        image: influxdb:1.8.4-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: influxdb
+          containerPort: 8086
+          protocol: TCP
+        volumeMounts:
+        - name: influxdb-data
+          mountPath: /var/lib/influxdb
+          subPath: influxdb
+        - name: influxdb-config
+          mountPath: /etc/influxdb
+      volumes:
+      - name: influxdb-data
+        hostPath:
+          path: /var/lib/influxdb
+          type: DirectoryOrCreate
+      - name: influxdb-config
+        hostPath:
+          path: /etc/influxdb
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-svc
+  namespace: influxdb
+spec:
+  type: NodePort
+  ports:
+    - port: 8086
+      targetPort: 8086 
+      nodePort: 30013
+  selector:
+    app: influxdb
